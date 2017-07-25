@@ -1,0 +1,38 @@
+package com.coffee.shop.api.mapper;
+
+import com.coffee.shop.api.resources.CoffeeKindResource;
+import com.coffee.shop.dao.entity.CoffeeKind;
+import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
+
+/**
+ * @author Lokki17
+ * @since 22.07.2017
+ */
+@Component
+public class CoffeeKindMapper {
+
+    public CoffeeKindResource toResource(CoffeeKind entity) {
+        return CoffeeKindResource.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .price(entity.getPrice().doubleValue())
+                .build();
+    }
+
+    public CoffeeKind fromResource(CoffeeKindResource resource) {
+        return CoffeeKind.builder()
+                .name(resource.getName())
+                .description(resource.getDescription())
+                .price(new BigDecimal(resource.getPrice()))
+                .build();
+    }
+
+    public CoffeeKind fromResource(CoffeeKindResource resource, CoffeeKind entity) {
+        entity.setDescription(resource.getDescription());
+        entity.setName(resource.getName());
+        return entity;
+    }
+}

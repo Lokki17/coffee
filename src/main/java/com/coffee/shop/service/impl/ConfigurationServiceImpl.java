@@ -38,16 +38,6 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     }
 
     @Override
-    public Configuration update(Configuration updatedEntity) {
-        return repository.save(updatedEntity);
-    }
-
-    @Override
-    public void delete(Configuration entity) {
-        repository.delete(entity);
-    }
-
-    @Override
     public Option<Configuration> getLastConfig() {
         return Option.of(repository.findLast());
     }

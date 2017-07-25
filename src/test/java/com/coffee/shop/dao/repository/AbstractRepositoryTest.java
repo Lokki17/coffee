@@ -1,6 +1,5 @@
 package com.coffee.shop.dao.repository;
 
-import com.coffee.shop.JpaTest;
 import com.coffee.shop.dao.entity.CoffeeCup;
 import com.coffee.shop.dao.entity.CoffeeKind;
 import com.coffee.shop.dao.entity.Configuration;

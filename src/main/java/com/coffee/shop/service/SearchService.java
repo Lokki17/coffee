@@ -1,7 +1,6 @@
 package com.coffee.shop.service;
 
 import com.coffee.shop.dao.entity.CoffeeKind;
-import javaslang.control.Option;
 
 import java.util.List;
 
@@ -18,6 +17,4 @@ public interface SearchService {
     CoffeeKind create(CoffeeKind newEntity);
 
     CoffeeKind update(CoffeeKind newEntity);
-
-    void deleteAll();
 }

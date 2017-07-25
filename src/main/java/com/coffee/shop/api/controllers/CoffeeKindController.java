@@ -3,7 +3,9 @@ package com.coffee.shop.api.controllers;
 import com.coffee.shop.api.mapper.CoffeeKindMapper;
 import com.coffee.shop.api.resources.CoffeeKindResource;
 import com.coffee.shop.dao.entity.CoffeeKind;
+import com.coffee.shop.dao.exception.EntityExistsException;
 import com.coffee.shop.service.CoffeeKindService;
+import javaslang.control.Option;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,12 @@ public class CoffeeKindController {
     @PostMapping
     public ResponseEntity<CoffeeKindResource> create(@Valid @RequestBody CoffeeKindResource resource) {
         CoffeeKind entity = mapper.fromResource(resource);
+        Option<CoffeeKind> old = service.getKind(entity.getName());
+
+        if (old.isDefined()){
+            throw new EntityExistsException("Coffee kind already exists");
+        }
+
 
         return new ResponseEntity<>(
                 mapper.toResource(service.create(entity)),

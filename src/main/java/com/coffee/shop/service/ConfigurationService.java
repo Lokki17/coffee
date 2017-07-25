@@ -17,10 +17,6 @@ public interface ConfigurationService {
 
     Configuration create(Configuration newEntity);
 
-    Configuration update(Configuration updatedEntity);
-
-    void delete(Configuration entity);
-
     Option<Configuration> getLastConfig();
 
 }

@@ -30,7 +30,7 @@ public @interface CoffeeKindExists {
 
     Class<? extends Payload>[] payload() default {};
 
-    class Validator implements ConstraintValidator<CoffeeKindExists, CoffeeKind> {
+    class Validator implements ConstraintValidator<CoffeeKindExists, String> {
 
         @Autowired
         private CoffeeKindService coffeeKindService;
@@ -41,12 +41,12 @@ public @interface CoffeeKindExists {
         }
 
         @Override
-        public boolean isValid(CoffeeKind coffeeKind, ConstraintValidatorContext context) {
+        public boolean isValid(String coffeeKind, ConstraintValidatorContext context) {
             if (Objects.isNull(coffeeKind)) {
                 return true;
             }
 
-            return coffeeKindService.getKind(coffeeKind.getName()).isDefined();
+            return coffeeKindService.getKind(coffeeKind).isDefined();
         }
     }
 }

@@ -23,7 +23,7 @@ public class CoffeeCupResource extends AbstractResource {
 
     @CoffeeKindExists
     @NotNull
-    private CoffeeKindResource coffeeKind;
+    private String coffeeKind;
 
     @Min(0)
     private Integer count;

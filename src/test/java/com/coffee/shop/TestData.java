@@ -1,5 +1,8 @@
 package com.coffee.shop;
 
+import com.coffee.shop.api.resources.CoffeeCupResource;
+import com.coffee.shop.api.resources.CoffeeKindResource;
+import com.coffee.shop.api.resources.ConfigurationResource;
 import com.coffee.shop.dao.entity.CoffeeCup;
 import com.coffee.shop.dao.entity.CoffeeKind;
 import com.coffee.shop.dao.entity.Configuration;
@@ -17,6 +20,12 @@ public class TestData {
             .name("Capuchino")
             .description("hot coffee")
             .price(new BigDecimal(2))
+            .build();
+
+    public static CoffeeKindResource CAPUCHINO_RESOURCE = CoffeeKindResource.builder()
+            .name(CAPUCHINO.getName())
+            .description(CAPUCHINO.getDescription())
+            .price(CAPUCHINO.getPrice().doubleValue())
             .build();
 
     public static CoffeeKind MOKA = CoffeeKind.builder()
@@ -49,9 +58,21 @@ public class TestData {
             .deliveryPrice(new BigDecimal(2))
             .build();
 
+    public static ConfigurationResource CONFIGURATION_RESOURCE = ConfigurationResource.builder()
+            .cupCount(CONFIGURATION.getCupCount())
+            .discountSumm(CONFIGURATION.getDiscountSumm().doubleValue())
+            .deliveryPrice(CONFIGURATION.getDeliveryPrice().doubleValue())
+            .build();
+
     public static CoffeeCup CUP_CAPUCHINO = CoffeeCup.builder()
             .coffeeKind(CAPUCHINO)
             .count(1)
+            .build();
+
+    public static CoffeeCupResource CUP_CAPUCHINO_RESOURCE = CoffeeCupResource.builder()
+            .coffeeKind(CUP_CAPUCHINO.getCoffeeKind().getName())
+            .count(CUP_CAPUCHINO.getCount())
+            .id(CUP_CAPUCHINO.getId())
             .build();
 
     public static CoffeeCup CUP_MOKA = CoffeeCup.builder()

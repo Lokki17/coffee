@@ -6,10 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 @Component
 public class CoffeeKindMapper {
 

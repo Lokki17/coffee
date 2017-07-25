@@ -3,7 +3,9 @@ package com.coffee.shop.api.controllers;
 import com.coffee.shop.api.mapper.ConfigurationMapper;
 import com.coffee.shop.api.resources.ConfigurationResource;
 import com.coffee.shop.dao.entity.Configuration;
+import com.coffee.shop.dao.exception.EntityNotFoundException;
 import com.coffee.shop.service.ConfigurationService;
+import javaslang.control.Option;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/coffee")
+@RequestMapping("/config")
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 @Slf4j
 public class ConfigurationController {
@@ -34,11 +36,18 @@ public class ConfigurationController {
         return mapper.toResource(configuration);
     }
 
-    @GetMapping
+    @GetMapping("history")
     public List<ConfigurationResource> getAll() {
         return service.findAll().stream()
                 .map(mapper::toResource)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping
+    public ConfigurationResource getLast() {
+        return service.getLastConfig()
+                .map(mapper::toResource)
+                .getOrElseThrow(() -> new EntityNotFoundException("Configuration not found"));
     }
 
     @PostMapping
@@ -50,19 +59,4 @@ public class ConfigurationController {
                 HttpStatus.CREATED
         );
     }
-
-    @PutMapping("/{id}")
-    public ConfigurationResource update(@Valid @RequestBody ConfigurationResource resource, @PathVariable("id") Configuration entity) {
-        Configuration updated = mapper.fromResource(resource, entity);
-
-        return mapper.toResource(service.update(updated));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Configuration entity) {
-        service.delete(entity);
-
-        return ResponseEntity.noContent().build();
-    }
-
 }

@@ -3,8 +3,8 @@ package com.coffee.shop.service.impl;
 import com.coffee.shop.dao.entity.CoffeeKind;
 import com.coffee.shop.dao.search.SearchRepository;
 import com.coffee.shop.service.SearchService;
-import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +35,16 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public CoffeeKind update(CoffeeKind updatedEntity) {
-        return repository.save(updatedEntity);
+//        List<CoffeeKind> kinds = repository.findByName(updatedEntity.getName());
+//        repository.delete(kinds);
+//
+        return repository.save(getKindWithIdNull(updatedEntity));
     }
 
-    @Override
-    public void deleteAll() {
-        repository.deleteAll();
+
+    private CoffeeKind getKindWithIdNull(CoffeeKind coffeeKind){
+        CoffeeKind tmp = (CoffeeKind) SerializationUtils.clone(coffeeKind);
+        tmp.setId(null);
+        return tmp;
     }
 }

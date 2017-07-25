@@ -1,6 +1,5 @@
 package com.coffee.shop.dao.repository;
 
-import com.coffee.shop.JpaTest;
 import com.coffee.shop.dao.entity.CoffeeCup;
 import org.hamcrest.Matchers;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.coffee.shop;
+package com.coffee.shop.dao.repository;
 
 
 import com.coffee.shop.dao.config.DaoConfiguration;

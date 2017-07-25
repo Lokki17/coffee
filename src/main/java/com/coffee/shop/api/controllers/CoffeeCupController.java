@@ -3,6 +3,7 @@ package com.coffee.shop.api.controllers;
 import com.coffee.shop.api.mapper.CoffeeCupMapper;
 import com.coffee.shop.api.resources.CoffeeCupResource;
 import com.coffee.shop.dao.entity.CoffeeCup;
+import com.coffee.shop.dao.entity.Order;
 import com.coffee.shop.service.CoffeeCupService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,27 +42,10 @@ public class CoffeeCupController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping
-    public ResponseEntity<CoffeeCupResource> create(@Valid @RequestBody CoffeeCupResource resource) {
-        CoffeeCup entity = mapper.fromResource(resource);
-
-        return new ResponseEntity<>(
-                mapper.toResource(service.create(entity)),
-                HttpStatus.CREATED
-        );
-    }
-
-    @PutMapping("/{id}")
-    public CoffeeCupResource update(@Valid @RequestBody CoffeeCupResource resource, @PathVariable("id") CoffeeCup entity) {
-                CoffeeCup updated = mapper.fromResource(resource, entity);
-
-        return mapper.toResource(service.update(updated));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") CoffeeCup entity) {
-        service.delete(entity);
-
-        return ResponseEntity.noContent().build();
+    @GetMapping("orders/{orderId}")
+    public List<CoffeeCupResource> getAllByOrder(@PathVariable("orderId") Order order) {
+        return order.getCups().stream()
+                .map(mapper::toResource)
+                .collect(Collectors.toList());
     }
 }

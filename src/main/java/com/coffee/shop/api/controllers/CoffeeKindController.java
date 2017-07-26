@@ -46,12 +46,6 @@ public class CoffeeKindController {
     @PostMapping
     public ResponseEntity<CoffeeKindResource> create(@Valid @RequestBody CoffeeKindResource resource) {
         CoffeeKind entity = mapper.fromResource(resource);
-        Option<CoffeeKind> old = service.getKind(entity.getName());
-
-        if (old.isDefined()){
-            throw new EntityExistsException("Coffee kind already exists");
-        }
-
 
         return new ResponseEntity<>(
                 mapper.toResource(service.create(entity)),

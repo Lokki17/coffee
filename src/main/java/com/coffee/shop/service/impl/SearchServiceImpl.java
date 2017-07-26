@@ -1,6 +1,7 @@
 package com.coffee.shop.service.impl;
 
 import com.coffee.shop.dao.entity.CoffeeKind;
+import com.coffee.shop.dao.entity.SearchCoffeeKind;
 import com.coffee.shop.dao.search.SearchRepository;
 import com.coffee.shop.service.SearchService;
 import lombok.RequiredArgsConstructor;
@@ -19,26 +20,24 @@ public class SearchServiceImpl implements SearchService {
     private final SearchRepository repository;
 
     @Override
-    public List<CoffeeKind> findByDescription(String description) {
+    public List<SearchCoffeeKind> findByDescription(String description) {
         return repository.findByDescription(description);
     }
 
     @Override
-    public List<CoffeeKind> findByName(String name) {
-        return repository.findByName(name);
+    public List<SearchCoffeeKind> findByName(String name) {
+        return repository.findByNameLike(name);
     }
 
     @Override
-    public CoffeeKind create(CoffeeKind newEntity) {
+    public SearchCoffeeKind create(SearchCoffeeKind newEntity) {
         return repository.save(newEntity);
     }
 
     @Override
-    public CoffeeKind update(CoffeeKind updatedEntity) {
-//        List<CoffeeKind> kinds = repository.findByName(updatedEntity.getName());
-//        repository.delete(kinds);
-//
-        return repository.save(getKindWithIdNull(updatedEntity));
+    public SearchCoffeeKind update(SearchCoffeeKind updatedEntity) {
+
+        return repository.save(updatedEntity);
     }
 
 

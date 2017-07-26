@@ -18,7 +18,7 @@ public class ConfigurationControllerTest extends BaseControllerIntegrationTest {
 
     private static final String URL_ITEM = URL + "/{id}";
 
-    private static final String URL_ALL = URL + "/history";
+    private static final String URL_HISTORY = URL + "/history";
 
 
     @Test
@@ -41,7 +41,7 @@ public class ConfigurationControllerTest extends BaseControllerIntegrationTest {
                 .config(CONFIGURATION)
                 .get();
 
-        mvc.perform(get(URL_ALL))
+        mvc.perform(get(URL_HISTORY))
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(status().isOk());
     }

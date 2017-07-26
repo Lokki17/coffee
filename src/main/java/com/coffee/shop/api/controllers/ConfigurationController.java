@@ -36,7 +36,7 @@ public class ConfigurationController {
         return mapper.toResource(configuration);
     }
 
-    @GetMapping("history")
+    @GetMapping("/history")
     public List<ConfigurationResource> getAll() {
         return service.findAll().stream()
                 .map(mapper::toResource)

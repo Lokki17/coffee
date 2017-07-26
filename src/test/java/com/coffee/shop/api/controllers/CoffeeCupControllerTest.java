@@ -50,11 +50,4 @@ public class CoffeeCupControllerTest extends BaseControllerIntegrationTest {
         mvc.perform(get(URL_ORDER, order.getId()))
                 .andExpect(jsonPath("$").isArray());
     }
-
-    @Test
-    public void getCurrentNotFound() throws Exception {
-
-        mvc.perform(get(URL_ITEM))
-                .andExpect(status().isNotFound());
-    }
 }

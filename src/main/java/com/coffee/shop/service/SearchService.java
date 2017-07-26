@@ -1,6 +1,7 @@
 package com.coffee.shop.service;
 
 import com.coffee.shop.dao.entity.CoffeeKind;
+import com.coffee.shop.dao.entity.SearchCoffeeKind;
 
 import java.util.List;
 
@@ -10,11 +11,11 @@ import java.util.List;
  */
 public interface SearchService {
 
-    List<CoffeeKind> findByDescription(String description);
+    List<SearchCoffeeKind> findByDescription(String description);
 
-    List<CoffeeKind> findByName(String name);
+    List<SearchCoffeeKind> findByName(String name);
 
-    CoffeeKind create(CoffeeKind newEntity);
+    SearchCoffeeKind create(SearchCoffeeKind newEntity);
 
-    CoffeeKind update(CoffeeKind newEntity);
+    SearchCoffeeKind update(SearchCoffeeKind newEntity);
 }

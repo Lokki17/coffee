@@ -24,8 +24,8 @@ public class CoffeeKindControllerTest extends BaseControllerIntegrationTest {
                 .kind(CAPUCHINO)
                 .get();
 
-        mvc.perform(get(URL_ITEM, kind.getName()))
-//                .andExpect(jsonPath("$.id").isNotEmpty())
+        mvc.perform(get(URL_ITEM, kind.getId()))
+                .andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(jsonPath("$.name").isNotEmpty())
                 .andExpect(jsonPath("$.description").isNotEmpty())
                 .andExpect(jsonPath("$.price").isNumber())
@@ -48,12 +48,22 @@ public class CoffeeKindControllerTest extends BaseControllerIntegrationTest {
         mvc.perform(post(URL)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(json(CAPUCHINO_RESOURCE)))
-//                .andExpect(jsonPath("$.id").isNotEmpty())
+                .andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(jsonPath("$.name").isNotEmpty())
                 .andExpect(jsonPath("$.description").isNotEmpty())
                 .andExpect(jsonPath("$.price").isNumber())
                 .andExpect(status().isCreated());
+    }
 
+    @Test
+    public void createAlreadyExists() throws Exception {
+        testContext
+                .kind(CAPUCHINO);
+
+        mvc.perform(post(URL)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(json(CAPUCHINO_RESOURCE)))
+                .andExpect(status().isConflict());
     }
 
     @Test

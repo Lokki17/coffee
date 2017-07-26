@@ -2,7 +2,9 @@ package com.coffee.shop.api.controllers;
 
 import com.coffee.shop.api.mapper.CoffeeKindMapper;
 import com.coffee.shop.api.resources.CoffeeKindResource;
+import com.coffee.shop.api.resources.SearchCoffeeKindResource;
 import com.coffee.shop.dao.entity.CoffeeKind;
+import com.coffee.shop.dao.entity.SearchCoffeeKind;
 import com.coffee.shop.service.CoffeeKindService;
 import com.coffee.shop.service.SearchService;
 import lombok.RequiredArgsConstructor;
@@ -32,14 +34,14 @@ public class SearchController {
     private final CoffeeKindMapper mapper;
 
     @GetMapping(params = "description")
-    public List<CoffeeKindResource> getByDescription(@PathParam("description") String description) {
+    public List<SearchCoffeeKindResource> getByDescription(@PathParam("description") String description) {
         return service.findByDescription(description).stream()
                 .map(mapper::toResource)
                 .collect(Collectors.toList());
     }
 
     @GetMapping(params = "name")
-    public List<CoffeeKindResource> getByName(@PathParam("name") String name) {
+    public List<SearchCoffeeKindResource> getByName(@PathParam("name") String name) {
         return service.findByName(name).stream()
                 .map(mapper::toResource)
                 .collect(Collectors.toList());

@@ -31,6 +31,5 @@ public abstract class AbstractEntity implements Serializable {
     @GeneratedValue(generator = "sequenceGenerator")
     @Getter
     @Setter
-    @Convert(converter = Conv.class, attributeName = "id")
     protected Long id;
 }

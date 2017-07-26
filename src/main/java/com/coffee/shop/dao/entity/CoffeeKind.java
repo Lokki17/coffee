@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(indexName = "kind", type = "coffeeKind", shards = 1, replicas = 0, refreshInterval = "-1")
+//@Document(indexName = "kind", type = "coffeeKind", shards = 1, replicas = 0, refreshInterval = "-1")
 public class CoffeeKind extends AbstractEntity {
 
     @Column

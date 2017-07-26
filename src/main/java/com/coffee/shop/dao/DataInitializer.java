@@ -1,9 +1,6 @@
 package com.coffee.shop.dao;
 
-import com.coffee.shop.dao.entity.CoffeeCup;
-import com.coffee.shop.dao.entity.CoffeeKind;
-import com.coffee.shop.dao.entity.Configuration;
-import com.coffee.shop.dao.entity.Order;
+import com.coffee.shop.dao.entity.*;
 import com.coffee.shop.dao.repository.CoffeeCupRepository;
 import com.coffee.shop.dao.repository.CoffeeKindRepository;
 import com.coffee.shop.dao.repository.ConfigurationRepository;
@@ -11,6 +8,7 @@ import com.coffee.shop.dao.repository.OrderRepository;
 import com.coffee.shop.dao.search.SearchRepository;
 import com.coffee.shop.service.SearchService;
 import com.google.common.collect.Lists;
+import javaslang.control.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -74,7 +72,7 @@ public class DataInitializer {
                 .build());
 
         CoffeeKind frappe = createCoffeeKindIfNotPresent(CoffeeKind.builder()
-                .name("Frappe")
+                .name("Turkish Frappe")
                 .description("cold greek coffee")
                 .price(new BigDecimal(3))
                 .build());
@@ -127,9 +125,13 @@ public class DataInitializer {
 
 
     private void createIndexIfNotPresent(CoffeeKind kind) {
-        List<CoffeeKind> searches = Lists.newArrayList(searchRepository.findAll());
-        if (!searches.contains(kind)){
-            searchService.create(kind);
+        List<SearchCoffeeKind> searches = Lists.newArrayList(searchRepository.findAll());
+        Long count = searches.stream()
+                .filter(value -> value.getName().equals(kind.getName()))
+                .count();
+
+        if (count == 0){
+            searchService.create(new SearchCoffeeKind(kind));
         }
     }
 

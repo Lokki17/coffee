@@ -11,10 +11,4 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 @EnableElasticsearchRepositories(basePackages = "com.coffee.shop.dao.search")
 public class SearchConfig {
 
-    @Profile("initdb")
-    @Bean
-    @Lazy(false)
-    DataInitializer init() {
-        return new DataInitializer();
-    }
 }

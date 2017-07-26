@@ -1,6 +1,14 @@
 package com.coffee.shop.api.controllers;
 
 import com.coffee.shop.Application;
+import com.coffee.shop.api.resources.CoffeeKindResource;
+import com.coffee.shop.dao.entity.CoffeeKind;
+import com.coffee.shop.dao.entity.Configuration;
+import com.coffee.shop.dao.repository.CoffeeCupRepository;
+import com.coffee.shop.dao.repository.CoffeeKindRepository;
+import com.coffee.shop.dao.repository.ConfigurationRepository;
+import com.coffee.shop.dao.repository.OrderRepository;
+import com.coffee.shop.dao.search.SearchRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
@@ -8,6 +16,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import javaslang.control.Try;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +53,21 @@ public abstract class BaseControllerIntegrationTest {
     @Autowired
     private WebApplicationContext context;
 
+    @Autowired
+    private CoffeeCupRepository coffeeCupRepository;
+
+    @Autowired
+    private CoffeeKindRepository coffeeKindRepository;
+
+    @Autowired
+    private ConfigurationRepository configurationRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private SearchRepository searchRepository;
+
     @Before
     public void setup() {
         this.mvc = MockMvcBuilders
@@ -77,5 +101,14 @@ public abstract class BaseControllerIntegrationTest {
         };
     }
 
+    @After
+    public void tearDown() {
+        orderRepository.deleteAll();
+        coffeeCupRepository.deleteAll();
+        coffeeKindRepository.deleteAll();
+        configurationRepository.deleteAll();
+        searchRepository.deleteAll();
+        System.out.println();
+    }
 
 }

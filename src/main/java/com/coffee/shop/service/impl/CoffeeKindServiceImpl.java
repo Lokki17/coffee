@@ -4,8 +4,8 @@ import com.coffee.shop.dao.entity.CoffeeKind;
 import com.coffee.shop.dao.entity.SearchCoffeeKind;
 import com.coffee.shop.dao.exception.EntityExistsException;
 import com.coffee.shop.dao.repository.CoffeeKindRepository;
+import com.coffee.shop.dao.search.SearchRepository;
 import com.coffee.shop.service.CoffeeKindService;
-import com.coffee.shop.service.SearchService;
 import javaslang.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class CoffeeKindServiceImpl implements CoffeeKindService {
     private final CoffeeKindRepository repository;
 
     @NotNull
-    private final SearchService searchService;
+    private final SearchRepository searchRepository;
 
     @Override
     public Option<CoffeeKind> getKind(String name) {
@@ -41,17 +41,18 @@ public class CoffeeKindServiceImpl implements CoffeeKindService {
 
     @Override
     public CoffeeKind create(CoffeeKind newEntity) {
-        if (repository.findByName(newEntity.getName()) != null){
+        if (repository.findByName(newEntity.getName()) != null) {
             throw new EntityExistsException("Coffee kind already exists");
         }
 
-        searchService.create(new SearchCoffeeKind(newEntity));
-        return repository.save(newEntity);
+        CoffeeKind created = repository.save(newEntity);
+        searchRepository.save(new SearchCoffeeKind(created));
+        return created;
     }
 
     @Override
     public CoffeeKind update(CoffeeKind updatedEntity) {
-        searchService.update(new SearchCoffeeKind(updatedEntity));
+        searchRepository.save(new SearchCoffeeKind(updatedEntity));
         return repository.save(updatedEntity);
     }
 

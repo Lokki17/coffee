@@ -4,8 +4,6 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import java.math.BigDecimal;
-
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = false)
@@ -19,11 +17,11 @@ public class SearchCoffeeKind {
 
     private String description;
 
-    private BigDecimal price;
+    private String coffeeKindId;
 
     public SearchCoffeeKind(CoffeeKind coffeeKind) {
         this.name = coffeeKind.getName();
         this.description = coffeeKind.getDescription();
-        this.price = coffeeKind.getPrice();
+        this.coffeeKindId = coffeeKind.getId().toString();
     }
 }

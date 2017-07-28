@@ -1,10 +1,8 @@
 package com.coffee.shop.dao.entity;
 
 import lombok.*;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 
 /**
  * @author Lokki17

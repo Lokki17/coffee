@@ -5,7 +5,6 @@ import com.coffee.shop.api.resources.ConfigurationResource;
 import com.coffee.shop.dao.entity.Configuration;
 import com.coffee.shop.dao.exception.EntityNotFoundException;
 import com.coffee.shop.service.ConfigurationService;
-import javaslang.control.Option;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

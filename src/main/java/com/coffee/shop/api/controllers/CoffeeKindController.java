@@ -4,7 +4,6 @@ import com.coffee.shop.api.mapper.CoffeeKindMapper;
 import com.coffee.shop.api.resources.CoffeeKindResource;
 import com.coffee.shop.dao.entity.CoffeeKind;
 import com.coffee.shop.service.CoffeeKindService;
-import com.coffee.shop.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,6 @@ public class CoffeeKindController {
 
     @NotNull
     private final CoffeeKindService service;
-
-    @NotNull
-    private final SearchService searchService;
 
     @NotNull
     private final CoffeeKindMapper mapper;
@@ -70,7 +66,6 @@ public class CoffeeKindController {
         return ResponseEntity.noContent().build();
     }
 
-//    @GetMapping(path = "/search", params = "description")
     @GetMapping(params = "key")
     public List<CoffeeKindResource> getByDescription(@PathParam("key") String key) {
         return service.search(key).stream()

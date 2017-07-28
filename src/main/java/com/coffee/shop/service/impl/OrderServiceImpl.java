@@ -1,6 +1,5 @@
 package com.coffee.shop.service.impl;
 
-import com.coffee.shop.dao.entity.CoffeeCup;
 import com.coffee.shop.dao.entity.Configuration;
 import com.coffee.shop.dao.entity.Order;
 import com.coffee.shop.dao.exception.EntityNotFoundException;

@@ -1,6 +1,5 @@
 package com.coffee.shop.api.resources.validation;
 
-import com.coffee.shop.dao.entity.CoffeeKind;
 import com.coffee.shop.service.CoffeeKindService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +23,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = CoffeeKindExists.Validator.class)
 public @interface CoffeeKindExists {
 
-    String message() default "{wrong.contact}";
+    String message() default "{coffee kind doesn't exists}";
 
     Class<?>[] groups() default {};
 

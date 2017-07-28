@@ -8,7 +8,6 @@ import com.coffee.shop.dao.repository.OrderRepository;
 import com.coffee.shop.dao.search.SearchRepository;
 import com.coffee.shop.service.SearchService;
 import com.google.common.collect.Lists;
-import javaslang.control.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -130,7 +129,7 @@ public class DataInitializer {
                 .filter(value -> value.getName().equals(kind.getName()))
                 .count();
 
-        if (count == 0){
+        if (count == 0) {
             searchService.create(new SearchCoffeeKind(kind));
         }
     }

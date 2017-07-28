@@ -1,10 +1,7 @@
 package com.coffee.shop.api.mapper;
 
 import com.coffee.shop.api.resources.CoffeeKindResource;
-import com.coffee.shop.api.resources.SearchCoffeeKindResource;
 import com.coffee.shop.dao.entity.CoffeeKind;
-import com.coffee.shop.dao.entity.SearchCoffeeKind;
-import javaslang.control.Option;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

@@ -10,10 +10,6 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 @Component
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class OrderMapper {
@@ -48,8 +44,8 @@ public class OrderMapper {
         entity.setPrice(new BigDecimal(resource.getPrice()));
         entity.setUserName(resource.getUserName());
         entity.setCups(resource.getCups().stream()
-        .map(coffeeCupMapper::fromResource)
-        .collect(Collectors.toSet()));
+                .map(coffeeCupMapper::fromResource)
+                .collect(Collectors.toSet()));
 
         return entity;
     }

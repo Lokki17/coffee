@@ -1,7 +1,6 @@
 package com.coffee.shop.dao.entity;
 
 import lombok.*;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

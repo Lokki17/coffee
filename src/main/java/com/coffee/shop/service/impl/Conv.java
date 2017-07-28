@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.AttributeConverter;
 
 @Component
-public class Conv implements AttributeConverter<Long, String>{
+public class Conv implements AttributeConverter<Long, String> {
 
     @Override
     public String convertToDatabaseColumn(Long attribute) {

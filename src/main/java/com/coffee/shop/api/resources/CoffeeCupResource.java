@@ -1,7 +1,6 @@
 package com.coffee.shop.api.resources;
 
 import com.coffee.shop.api.resources.validation.CoffeeKindExists;
-import com.coffee.shop.dao.entity.CoffeeKind;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 

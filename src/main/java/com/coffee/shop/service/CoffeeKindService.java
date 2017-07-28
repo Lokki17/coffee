@@ -13,6 +13,8 @@ public interface CoffeeKindService {
 
     List<CoffeeKind> findAll();
 
+    List<CoffeeKind> search(String key);
+
     CoffeeKind create(CoffeeKind newEntity);
 
     CoffeeKind update(CoffeeKind updatedEntity);

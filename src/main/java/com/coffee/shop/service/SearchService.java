@@ -9,9 +9,7 @@ import java.util.List;
 
 public interface SearchService {
 
-    List<CoffeeKind> findByDescription(String description);
-
-    List<CoffeeKind> findByName(String name);
+//    List<SearchCoffeeKind> search(String key);
 
     SearchCoffeeKind create(SearchCoffeeKind newEntity);
 

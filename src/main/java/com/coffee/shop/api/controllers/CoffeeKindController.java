@@ -70,16 +70,10 @@ public class CoffeeKindController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(path = "/search", params = "description")
-    public List<CoffeeKindResource> getByDescription(@PathParam("description") String description) {
-        return searchService.findByDescription(description).stream()
-                .map(mapper::toResource)
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping(path = "/search", params = "name")
-    public List<CoffeeKindResource> getByName(@PathParam("name") String name) {
-        return searchService.findByName(name).stream()
+//    @GetMapping(path = "/search", params = "description")
+    @GetMapping(params = "key")
+    public List<CoffeeKindResource> getByDescription(@PathParam("key") String key) {
+        return service.search(key).stream()
                 .map(mapper::toResource)
                 .collect(Collectors.toList());
     }

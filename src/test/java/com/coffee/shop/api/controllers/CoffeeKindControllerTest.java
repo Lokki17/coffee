@@ -15,8 +15,6 @@ public class CoffeeKindControllerTest extends BaseControllerIntegrationTest {
 
     private static final String URL = "/kind";
 
-    private static final String URL_SEARCH = URL + "/search";
-
     private static final String URL_ITEM = URL + "/{id}";
 
 
@@ -106,8 +104,8 @@ public class CoffeeKindControllerTest extends BaseControllerIntegrationTest {
                 .kind(CAPUCHINO)
                 .get();
 
-        mvc.perform(get(URL_SEARCH)
-                .param("name", kind.getName()))
+        mvc.perform(get(URL)
+                .param("key", kind.getName()))
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(status().isOk());
     }
@@ -118,10 +116,9 @@ public class CoffeeKindControllerTest extends BaseControllerIntegrationTest {
                 .kind(CAPUCHINO)
                 .get();
 
-        mvc.perform(get(URL_SEARCH)
-                .param("description", kind.getDescription()))
+        mvc.perform(get(URL)
+                .param("key", kind.getDescription()))
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(status().isOk());
     }
-
 }

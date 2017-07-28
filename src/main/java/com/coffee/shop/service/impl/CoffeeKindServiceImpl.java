@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
@@ -37,6 +38,13 @@ public class CoffeeKindServiceImpl implements CoffeeKindService {
     @Override
     public List<CoffeeKind> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<CoffeeKind> search(String key) {
+        return searchRepository.findByDescriptionOrName(key, key).stream()
+                .map(value -> repository.findOne(Long.parseLong(value.getCoffeeKindId())))
+                .collect(Collectors.toList());
     }
 
     @Override

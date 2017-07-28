@@ -12,11 +12,11 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Document(indexName = "kind", type = "coffeeKind", shards = 1, replicas = 0, refreshInterval = "-1")
 public class SearchCoffeeKind {
 
-    @Id
     private String name;
 
     private String description;
 
+    @Id
     private String coffeeKindId;
 
     public SearchCoffeeKind(CoffeeKind coffeeKind) {

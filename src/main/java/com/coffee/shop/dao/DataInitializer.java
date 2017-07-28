@@ -144,13 +144,16 @@ public class DataInitializer {
     }
 
     private CoffeeKind createCoffeeKindIfNotPresent(CoffeeKind kind) {
-        createIndexIfNotPresent(kind);
+//        createIndexIfNotPresent(kind);
 
         List<CoffeeKind> result = coffeeKindRepository.findAll();
 
+
         if (!result.contains(kind)) {
-            return coffeeKindRepository.save(kind);
-        } else return kind;
+            kind = coffeeKindRepository.save(kind);
+        }
+        createIndexIfNotPresent(kind);
+        return kind;
     }
 
     private Configuration createConfigIfNotPresent(Configuration config) {

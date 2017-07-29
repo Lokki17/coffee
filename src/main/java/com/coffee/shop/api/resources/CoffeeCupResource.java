@@ -4,13 +4,14 @@ import com.coffee.shop.api.resources.validation.CoffeeKindExists;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false, of = {"coffeeKind"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -25,5 +26,6 @@ public class CoffeeCupResource extends AbstractResource {
     private String coffeeKind;
 
     @Min(0)
+    @NotNull
     private Integer count;
 }

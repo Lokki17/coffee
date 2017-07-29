@@ -11,10 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class CoffeeCupServiceImpl implements CoffeeCupService {

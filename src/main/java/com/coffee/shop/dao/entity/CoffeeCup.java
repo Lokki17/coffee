@@ -4,10 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 @Entity
 @Table
 @Data

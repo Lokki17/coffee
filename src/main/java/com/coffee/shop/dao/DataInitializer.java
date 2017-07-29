@@ -143,7 +143,6 @@ public class DataInitializer {
     }
 
     private CoffeeKind createCoffeeKindIfNotPresent(CoffeeKind kind) {
-//        createIndexIfNotPresent(kind);
 
         List<CoffeeKind> result = coffeeKindRepository.findAll();
 

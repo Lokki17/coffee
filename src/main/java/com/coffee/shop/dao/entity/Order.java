@@ -6,10 +6,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 @Entity
 @Table(name = "order_")
 @Data

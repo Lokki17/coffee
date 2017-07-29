@@ -12,10 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 
-/**
- * @author Lokki17
- * @since 23.07.2017
- */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class ScriptBeanGeneratorImpl implements ScriptBeanGenerator {

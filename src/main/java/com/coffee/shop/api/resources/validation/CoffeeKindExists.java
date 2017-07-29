@@ -14,10 +14,6 @@ import java.util.Objects;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-/**
- * @author Lokki
- * @since 26.01.2017
- */
 @Target({FIELD})
 @Retention(RUNTIME)
 @Constraint(validatedBy = CoffeeKindExists.Validator.class)

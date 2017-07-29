@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.Valid;
 import java.util.Set;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
@@ -25,6 +26,7 @@ public class OrderResource extends AbstractResource {
     private String address;
 
     @NotEmpty
+    @Valid
     private Set<CoffeeCupResource> cups;
 
     private Double price;

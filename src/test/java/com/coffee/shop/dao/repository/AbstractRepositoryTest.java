@@ -17,10 +17,6 @@ import java.util.HashSet;
 
 import static com.coffee.shop.TestData.*;
 
-/**
- * @author Lokki17
- * @since 23.07.2017
- */
 @Getter
 @JpaTest
 public abstract class AbstractRepositoryTest {

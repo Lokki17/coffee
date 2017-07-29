@@ -10,10 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 @Component
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class CoffeeCupMapper {
@@ -37,13 +33,5 @@ public class CoffeeCupMapper {
                                 + resource.getCoffeeKind() + " not found")))
                 .count(resource.getCount())
                 .build();
-    }
-
-    public CoffeeCup fromResource(CoffeeCupResource resource, CoffeeCup entity) {
-        entity.setCoffeeKind(coffeeKindService.getKind(resource.getCoffeeKind())
-                .getOrElseThrow(() -> new EntityNotFoundException("Coffee with name "
-                        + resource.getCoffeeKind() + " not found")));
-        entity.setCount(resource.getCount());
-        return entity;
     }
 }

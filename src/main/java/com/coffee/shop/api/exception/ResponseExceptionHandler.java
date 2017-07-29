@@ -30,15 +30,5 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity handleIllegalArgumentException(Exception exception, WebRequest request) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
-
-    @Data
-    @AllArgsConstructor
-    class ValidationDetails {
-        private String field;
-
-        private String message;
-
-        private Object value;
-    }
 }
 

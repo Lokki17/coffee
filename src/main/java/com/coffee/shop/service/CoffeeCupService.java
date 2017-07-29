@@ -5,10 +5,6 @@ import javaslang.control.Option;
 
 import java.util.List;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 public interface CoffeeCupService {
 
     Option<CoffeeCup> findById(Long id);

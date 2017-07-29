@@ -6,10 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.math.BigDecimal;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 @Entity
 @Data
 @Builder

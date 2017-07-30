@@ -3,18 +3,11 @@ package com.coffee.shop.dao;
 import com.coffee.shop.dao.entity.CoffeeKind;
 import com.coffee.shop.dao.entity.Configuration;
 import com.coffee.shop.dao.entity.SearchCoffeeKind;
-import com.coffee.shop.dao.repository.CoffeeCupRepository;
 import com.coffee.shop.dao.repository.CoffeeKindRepository;
 import com.coffee.shop.dao.repository.ConfigurationRepository;
-import com.coffee.shop.dao.repository.OrderRepository;
 import com.coffee.shop.dao.search.SearchRepository;
-import com.coffee.shop.service.SearchService;
-import com.google.common.collect.Lists;
 import javaslang.control.Try;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
-import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,25 +15,21 @@ import java.util.List;
 
 public class DataInitializer {
 
-    @Autowired
     private CoffeeKindRepository coffeeKindRepository;
 
-    @Autowired
     private ConfigurationRepository configurationRepository;
 
-    @Autowired
-    private SearchService searchService;
-
-    @Autowired
     private SearchRepository searchRepository;
 
-    @Value("${coffee.shop.init-delay}")
-    private Integer fileName;
+    public DataInitializer(CoffeeKindRepository coffeeKindRepository, ConfigurationRepository configurationRepository,
+                           SearchRepository searchRepository) {
+        this.coffeeKindRepository = coffeeKindRepository;
+        this.configurationRepository = configurationRepository;
+        this.searchRepository = searchRepository;
+        initialize();
+    }
 
-    @PostConstruct
-    public void initialize() throws InterruptedException {
-
-        Thread.sleep(fileName);
+    public void initialize() {
 
         Try.of(() -> {
             Files.lines(Paths.get(this.getClass().getClassLoader().getResource("initdb").toURI()))
@@ -58,17 +47,6 @@ public class DataInitializer {
     }
 
 
-    private void createIndexIfNotPresent(CoffeeKind kind) {
-        List<SearchCoffeeKind> searches = Lists.newArrayList(searchRepository.findAll());
-        Long count = searches.stream()
-                .filter(value -> value.getName().equals(kind.getName()))
-                .count();
-
-        if (count == 0) {
-            searchService.create(new SearchCoffeeKind(kind));
-        }
-    }
-
     private CoffeeKind createCoffeeKindIfNotPresent(CoffeeKind kind) {
 
         List<CoffeeKind> result = coffeeKindRepository.findAll();
@@ -79,6 +57,14 @@ public class DataInitializer {
         }
         createIndexIfNotPresent(kind);
         return kind;
+    }
+
+    private void createIndexIfNotPresent(CoffeeKind kind) {
+        SearchCoffeeKind search = searchRepository.findOne(kind.getId().toString());
+
+        if (search == null) {
+            searchRepository.save(new SearchCoffeeKind(kind));
+        }
     }
 
     private void createConfigIfNotPresent(Configuration config) {

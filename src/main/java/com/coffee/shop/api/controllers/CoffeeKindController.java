@@ -17,7 +17,6 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping("/kind")
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
@@ -67,7 +66,7 @@ public class CoffeeKindController {
     }
 
     @GetMapping(params = "key")
-    public List<CoffeeKindResource> getByDescription(@PathParam("key") String key) {
+    public List<CoffeeKindResource> search(@PathParam("key") String key) {
         return service.search(key).stream()
                 .map(mapper::toResource)
                 .collect(Collectors.toList());

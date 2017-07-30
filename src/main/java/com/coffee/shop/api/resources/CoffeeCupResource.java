@@ -4,7 +4,6 @@ import com.coffee.shop.api.resources.validation.CoffeeKindExists;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 

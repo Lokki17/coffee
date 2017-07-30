@@ -2,7 +2,6 @@ package com.coffee.shop.service.impl;
 
 import com.coffee.shop.dao.entity.SearchCoffeeKind;
 import com.coffee.shop.dao.search.SearchRepository;
-import com.coffee.shop.service.CoffeeKindService;
 import com.coffee.shop.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

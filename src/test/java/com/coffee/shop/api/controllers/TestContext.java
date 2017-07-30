@@ -27,19 +27,13 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class TestContext {
 
-    private final CoffeeKindRepository coffeeKindRepository;
-
     private final CoffeeKindService coffeeKindService;
-
-    private final CoffeeCupRepository coffeeCupRepository;
 
     private final CoffeeCupService coffeeCupService;
 
     private final ConfigurationRepository configurationRepository;
 
     private final ConfigurationService configurationService;
-
-    private final OrderRepository orderRepository;
 
     private final OrderService orderService;
 
@@ -55,39 +49,26 @@ public class TestContext {
                 .collect(Collectors.toList());
     }
 
-    public TestCup cup(CoffeeCup data) {
-        CoffeeCup tmp = (CoffeeCup) SerializationUtils.clone(data);
 
-        CoffeeKind coffeeKind = new TestKind(tmp.getCoffeeKind()).get();
-        tmp.setCoffeeKind(coffeeKind);
-
-        return new TestCup(tmp);
-    }
-
-    public List<TestCup> cups(CoffeeCup... cups) {
-        return Stream.of(cups)
-                .map(this::cup)
-                .collect(Collectors.toList());
-    }
-
-    public TestOrder order(Order data, Configuration config) {
+    public TestOrder order(Order data) {
         Order tmp = (Order) SerializationUtils.clone(data);
-        Configuration tmpConfiguration = (Configuration) SerializationUtils.clone(config);
-
-        configurationRepository.save(tmpConfiguration);
         tmp.getCups()
                 .forEach(TestCup::new);
-//                .peek(TestCup::new)
-//                .collect(Collectors.toSet());
-
 
         return new TestOrder(tmp);
     }
 
+    public List<Order> orders(Order... orders) {
+        return Stream.of(orders)
+                .peek(this::order)
+        .collect(Collectors.toList());
+    }
+
+
     public TestConfiguration config(Configuration data) {
         Configuration tmp = (Configuration) SerializationUtils.clone(data);
 
-        return new TestConfiguration(tmp);
+        return new TestConfiguration(tmp, this);
     }
 
     public class TestCup {
@@ -145,7 +126,10 @@ public class TestContext {
 
         public final Configuration self;
 
-        public TestConfiguration(Configuration data) {
+        public final TestContext context;
+
+        public TestConfiguration(Configuration data, TestContext context) {
+            this.context = context;
             this.self = Option.of(data.getId())
                     .map(value -> configurationService.findById(value)
                             .getOrElse(() -> configurationService.create(data)))
@@ -154,6 +138,10 @@ public class TestContext {
 
         public Configuration get() {
             return self;
+        }
+
+        public TestContext and(){
+            return context;
         }
     }
 

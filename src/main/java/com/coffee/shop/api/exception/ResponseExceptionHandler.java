@@ -2,8 +2,6 @@ package com.coffee.shop.api.exception;
 
 import com.coffee.shop.dao.exception.EntityExistsException;
 import com.coffee.shop.dao.exception.EntityNotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

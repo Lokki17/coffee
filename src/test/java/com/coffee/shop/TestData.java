@@ -3,6 +3,7 @@ package com.coffee.shop;
 import com.coffee.shop.api.resources.CoffeeCupResource;
 import com.coffee.shop.api.resources.CoffeeKindResource;
 import com.coffee.shop.api.resources.ConfigurationResource;
+import com.coffee.shop.api.resources.OrderResource;
 import com.coffee.shop.dao.entity.CoffeeCup;
 import com.coffee.shop.dao.entity.CoffeeKind;
 import com.coffee.shop.dao.entity.Configuration;
@@ -11,6 +12,7 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 @Getter
@@ -107,6 +109,13 @@ public class TestData {
             .userName("One")
             .cups(new HashSet<>(Arrays.asList(CUP_ESPRESSOO, CUP_TURKISH, CUP_FRAPPE)))
             .price(new BigDecimal(14.5))
+            .build();
+
+    public static OrderResource ORDER_1_RESOURCE = OrderResource.builder()
+            .userName(ORDER_1.getUserName())
+            .address(ORDER_1.getAddress())
+            .price(ORDER_1.getPrice().doubleValue())
+            .cups(new HashSet<>(Collections.singletonList(CUP_CAPUCHINO_RESOURCE)))
             .build();
 
 }

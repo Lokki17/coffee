@@ -30,6 +30,7 @@ public class DaoConfiguration {
     @Autowired(required = false)
     private SearchRepository searchRepository;
 
+    //catch event ApplicationReadyEvent and populate DB
     @Profile("initdb")
     @Bean
     @Lazy(false)

@@ -46,7 +46,10 @@ public class ConfigurationController {
     public ConfigurationResource getLast() {
         return service.getLastConfig()
                 .map(mapper::toResource)
-                .getOrElseThrow(() -> new EntityNotFoundException("Configuration not found"));
+                .getOrElseThrow(() -> {
+                    log.error("Configuration not found");
+                    return new EntityNotFoundException("Configuration not found");
+                });
     }
 
     @PostMapping

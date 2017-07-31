@@ -5,5 +5,10 @@ import com.coffee.shop.dao.entity.Order;
 
 public interface PriceGenerator {
 
-    public Order setPrice(Order order, Configuration configuration);
+    /**
+     * Computes and set price for current order.
+     * @param order Current order
+     * @param configuration Current configuration
+     */
+    void setPrice(Order order, Configuration configuration);
 }

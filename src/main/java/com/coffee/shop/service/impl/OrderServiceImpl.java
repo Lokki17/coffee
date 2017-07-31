@@ -11,6 +11,7 @@ import com.coffee.shop.service.ScriptBeanGenerator;
 import javaslang.control.Option;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,12 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-/**
- * @author Lokki17
- * @since 22.07.2017
- */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @NotNull
@@ -73,7 +71,10 @@ public class OrderServiceImpl implements OrderService {
 
     private void setPrice(Order order) {
         Configuration currentConfig = configurationService.getLastConfig()
-                .getOrElseThrow(() -> new EntityNotFoundException("Config not found"));
+                .getOrElseThrow(() -> {
+                    log.error("Config not found");
+                    return new EntityNotFoundException("Config not found");
+                });
         generator.getGenerator().setPrice(order, currentConfig);
     }
 }

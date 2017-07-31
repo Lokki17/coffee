@@ -8,8 +8,10 @@ import com.coffee.shop.dao.search.SearchRepository;
 import com.coffee.shop.service.CoffeeKindService;
 import javaslang.control.Option;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
+@Slf4j
 public class CoffeeKindServiceImpl implements CoffeeKindService {
 
     @NotNull
@@ -48,8 +51,10 @@ public class CoffeeKindServiceImpl implements CoffeeKindService {
     }
 
     @Override
+    @Transactional
     public CoffeeKind create(CoffeeKind newEntity) {
         if (repository.findByName(newEntity.getName()) != null) {
+            log.error("Coffee kind already exists");
             throw new EntityExistsException("Coffee kind already exists");
         }
 
@@ -59,13 +64,16 @@ public class CoffeeKindServiceImpl implements CoffeeKindService {
     }
 
     @Override
+    @Transactional
     public CoffeeKind update(CoffeeKind updatedEntity) {
         searchRepository.save(new SearchCoffeeKind(updatedEntity));
         return repository.save(updatedEntity);
     }
 
     @Override
+    @Transactional
     public void delete(CoffeeKind entity) {
+        searchRepository.delete(entity.getId().toString());
         repository.delete(entity);
     }
 

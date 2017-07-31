@@ -5,6 +5,7 @@ import com.coffee.shop.dao.entity.CoffeeCup;
 import com.coffee.shop.dao.exception.EntityNotFoundException;
 import com.coffee.shop.service.CoffeeKindService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
+@Slf4j
 public class CoffeeCupMapper {
 
     @NotNull
@@ -29,8 +31,10 @@ public class CoffeeCupMapper {
     public CoffeeCup fromResource(CoffeeCupResource resource) {
         return CoffeeCup.builder()
                 .coffeeKind(coffeeKindService.getKind(resource.getCoffeeKind())
-                        .getOrElseThrow(() -> new EntityNotFoundException("Coffee with name "
-                                + resource.getCoffeeKind() + " not found")))
+                        .getOrElseThrow(() -> {
+                            log.error("Coffee with name " + resource.getCoffeeKind() + " not found");
+                            return new EntityNotFoundException("Coffee with name " + resource.getCoffeeKind() + " not found");
+                        }))
                 .count(resource.getCount())
                 .build();
     }

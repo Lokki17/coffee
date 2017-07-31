@@ -6,14 +6,13 @@ import com.coffee.shop.service.PriceGenerator
 class PriceGeneratorImpl implements PriceGenerator {
 
     @Override
-    Order setPrice(Order order, Configuration configuration) {
+    void setPrice(Order order, Configuration configuration) {
         BigDecimal price = getSumm(order, configuration);
         if (price.compareTo(configuration.getDiscountSumm()) < 0) {
             price = price.add(configuration.getDeliveryPrice())
         }
 
         order.setPrice(price);
-        return order;
     }
 
     private BigDecimal getSumm(Order order, Configuration configuration) {
